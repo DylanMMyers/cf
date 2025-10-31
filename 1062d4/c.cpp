@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+// Get-Content t.txt | .\c.exe
+// g++ c.cpp -o c
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    ll tt = 1;
+    cin >> tt;
+    while (tt--) {
+        int n; cin >> n;
+        int o = 0, e = 0;
+        vector<int> v(n);
+        for (int i = 0; i < n; i++) {
+            cin >> v[i];
+            if (v[i] % 2) o++;
+            else e++;
+        }
+        if (o && e) {
+            sort(v.begin(), v.end());
+        }
+        for (int i = 0; i < n; i++) {
+            cout << v[i] << " \n"[i == n - 1];
+        }
+    }
+}
