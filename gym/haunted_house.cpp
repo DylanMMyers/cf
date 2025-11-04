@@ -31,14 +31,14 @@ int main() {
         pq.push({0, 0});
         dist[0] = 0;
         while (!pq.empty()) {
-            int node = pq.top().second;
-            int currdist = dist[node];
+            int node = pq.top().second; // B
+            int currdist = dist[node]; // 2
             pq.pop();
             for (int j = 0; j < n; j++) {
                 if (al[node][j].first == 0 || node == j || !in[j]) continue;
                 int t = al[node][j].second;
                 if (dist[j] > currdist + t) {
-                    dist[j] = dist[node] + t;
+                    dist[j] = currdist + t;
                     pq.push({dist[j], j});
                 }
             }
