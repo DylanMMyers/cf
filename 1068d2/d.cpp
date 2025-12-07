@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+// Get-Content t.txt | .\d.exe
+// g++ d.cpp -o d
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    ll tt = 1;
+    cin >> tt;
+    while (tt--) {
+        int n, k; cin >> n >> k;
+        vector<ll> setbits(31, 0);
+        for (int i = 0; i < 31; i++) {
+            setbits[i] = ((1 << i) & n) ? 1 : 0;
+        }
+        ll shiftable = 0;
+        for (int i = 0; i < 31; i++) {
+            shiftable += setbits[i];
+        }
+        cout << shiftable * k << "\n";
+    }
+}

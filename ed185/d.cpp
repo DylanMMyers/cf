@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-// Get-Content t.txt | .\file.exe
-// g++ file.cpp -o file
+// Get-Content t.txt | .\d.exe
+// g++ d.cpp -o d
 
 int main() {
     ios::sync_with_stdio(0);
