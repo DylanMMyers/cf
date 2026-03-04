@@ -2,46 +2,39 @@
 #define ll long long
 using namespace std;
 // Get-Content t.txt | .\distinct_colors.exe
-
-vector<int> ans;
-unordered_map<int,set<int>> tree;
-unordered_map<int,vector<int>> al;
-
-void dfs(int curr, int prev) {
-    for (int x : al[curr]) {
-        if (x == prev) continue;
-        dfs(x, curr);
-        if (tree[x].size() > tree[curr].size()) swap(tree[x], tree[curr]);
-        for (auto ele : tree[x]) {
-            tree[curr].insert(ele);
-        }
-    }
-    ans[curr] = tree[curr].size();
-}
+// g++ distinct_colors.cpp -o distinct_colors
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    ll tt = 1;
-    //cin >> tt;
-    while (tt--) {
-        int n;
-        cin >> n;
-        for (int i = 1; i <= n; i++) {
-            int z;
-            cin >> z;
-            tree[i].insert(z);
-        }
-        for (int i = 0; i < n - 1; i++) {
-            int x, y;
-            cin >> x >> y;
-            al[x].push_back(y);
-            al[y].push_back(x);
-        }
-        ans.resize(n + 1);
-        dfs(1, 0);
-        for (int i = 1; i <= n; i++) {
-            cout << ans[i] << ' ';
-        }
+    int n; cin >> n;
+    vector<set<int>> tree(n + 1);
+    vector<vector<int>> al(n + 1);
+    vector<int> ans(n + 1);
+    for (int i = 1; i <= n; i++) {
+        int x; cin >> x;
+        tree[i].insert(x);
     }
+    for (int i = 0; i < n - 1; i++) {
+        int a, b; cin >> a >> b;
+        al[a].push_back(b);
+        al[b].push_back(a);
+    }
+    function<void(int, int)> dfs = [&](int node, int prev) {
+        for (int x : al[node]) {
+            if (x == prev) continue;
+            dfs(x, node);
+            if (tree[x].size() > tree[node].size()) swap(tree[x], tree[node]);
+            for (int y : tree[x]) {
+                tree[node].insert(y);
+            }
+        }
+        ans[node] = tree[node].size();
+    };
+    dfs(1, 0);
+    for (int i = 1; i <= n; i++) cout << ans[i] << ' ';
 }
+
+// solve each subproblem/subtree using dfs, store answer in vector (as it may be changed in future ops)
+// use small to large merging, where for each child in nodes subtree, merge smaller subtree into larger (use swap)
+// O(nlog^2n) -> with small to large, nodes move at most logn times, logn time complexity per move for using set

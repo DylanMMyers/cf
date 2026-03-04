@@ -1,3 +1,9 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+// Get-Content t.txt | .\subarray_sum_queries.exe
+// g++ subarray_sum_queries.cpp -o subarray_sum_queries
+
 template<typename T>
 struct Tree {
     static constexpr T base = 0;
@@ -42,3 +48,10 @@ struct Tree {
         );
     }
 };
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n, m; cin >> n >> m;
+    
+}
